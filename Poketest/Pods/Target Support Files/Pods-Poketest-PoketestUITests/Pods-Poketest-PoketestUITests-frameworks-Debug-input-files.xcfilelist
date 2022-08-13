@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-Poketest-PoketestUITests/Pods-Poketest-PoketestUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework

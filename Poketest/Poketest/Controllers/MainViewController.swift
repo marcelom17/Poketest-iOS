@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MainViewController: UIViewController {
 
+    @IBOutlet weak var pokemonImage: UIImageView!
+    @IBOutlet weak var pokemonNameLabel: UILabel!
+    
+    
     var pokemonManager = PokemonManager()
     
     override func viewDidLoad() {
@@ -37,6 +42,14 @@ class MainViewController: UIViewController {
 extension MainViewController : PokemonManagerDelegate{
     func didUpdatePokemon(_ pokemonManager: PokemonManager, pokemon: Pokemon) {
         print(pokemon.name)
+        print(pokemon.sprites?.frontDefault)
+        DispatchQueue.main.async {
+            self.pokemonNameLabel.text = pokemon.name
+            if let url = pokemon.sprites?.frontDefault{
+                self.pokemonImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "placeholder.png"))
+            }
+        }
+        
     }
     
     func didFailWithError(error: Error) {
