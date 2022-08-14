@@ -20,8 +20,8 @@ struct Pokemon : Codable{
     let gameIndices: [GameIndex?]
     let height: Int?
  //   let heldItems: [Any?]
-    let id: Int?
-    let isDefault: Bool?
+    let id: Int
+    let isDefault: Bool
     let locationAreaEncounters: String?
     let moves: [Move]?
     let name: String?
@@ -59,12 +59,12 @@ struct Pokemon : Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
             baseExperience = try values.decodeIfPresent(Int.self, forKey: .baseExperience)
             gameIndices = try values.decodeIfPresent([GameIndex?].self, forKey: .gameIndices)!
-            isDefault = try values.decodeIfPresent(Bool.self, forKey: .isDefault)
+            isDefault = try values.decodeIfPresent(Bool.self, forKey: .isDefault)!
             locationAreaEncounters = try values.decodeIfPresent(String.self, forKey: .locationAreaEncounters)
             abilities = try values.decodeIfPresent([Ability?].self, forKey: .abilities)!
             forms = try values.decodeIfPresent([Species?].self, forKey: .forms)!
             height = try values.decodeIfPresent(Int.self, forKey: .height)
-            id = try values.decodeIfPresent(Int.self, forKey: .id)
+            id = try values.decodeIfPresent(Int.self, forKey: .id)!
             moves = try values.decodeIfPresent([Move].self, forKey: .moves)
             name = try values.decodeIfPresent(String.self, forKey: .name)
             order = try values.decodeIfPresent(Int.self, forKey: .order)

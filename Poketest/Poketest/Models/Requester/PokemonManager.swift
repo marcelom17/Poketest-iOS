@@ -65,7 +65,6 @@ struct PokemonManager {
                     }
                 }
             }
-            //  let task = session.dataTask(with: url, completionHandler: handleData(data:response:error:)) //3
             task.resume() //4
         }
     }
