@@ -15,8 +15,18 @@ protocol PokemonManagerDelegate{
 struct PokemonManager {
     let baseURL = "https://pokeapi.co/api/v2/"
     var delegate: PokemonManagerDelegate?
+    let paginationSize = 20
     
-    //function to be called
+    
+    func fetchListPokemons(start: Int = 0){
+        let urlString = "\(baseURL)/pokemon?offset=\(start)&limit=\(paginationSize)"
+        print(urlString)
+        
+        performRequest(with: urlString, isDetails: false)
+
+    }
+    
+    //function to be called when searching
     func fetchPokemon(name: String){
         let urlString = "\(baseURL)/pokemon/\(name)"
         print(urlString)
@@ -25,14 +35,7 @@ struct PokemonManager {
     }
     
     
-    func fetchListPokemons(name: String){
-        let urlString = "\(baseURL)/pokemon/\(name)"
-        print(urlString)
-        
-        performRequest(with: urlString)
-    }
-    
-    func performRequest(with urlString: String){
+    func performRequest(with urlString: String, isDetails: Bool = true){
         // 1. Create URL
         // 2. Create URLSession
         // 3. Give the session a task
@@ -47,8 +50,18 @@ struct PokemonManager {
                 }
                 
                 if let safeData = data{
-                    if let pokemon = parseJSON(safeData){
-                        self.delegate?.didUpdatePokemon(self, pokemon: pokemon)
+                    if isDetails{
+                        if let pokemon = parsePokemonDetails(safeData){
+                            self.delegate?.didUpdatePokemon(self, pokemon: pokemon)
+                        }
+                    } else {
+                        if let pokemonList = parsePokemonList(safeData){
+                            for poke in pokemonList.results {
+                                if let url = poke?.url{
+                                    performRequest(with: url)
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -58,14 +71,25 @@ struct PokemonManager {
     }
     
     
-    func parseJSON(_ pokemon: Data) -> Pokemon?{
+    func parsePokemonDetails(_ pokemon: Data) -> Pokemon?{
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(Pokemon.self, from: pokemon)
             print("Name: \(decodedData.name)")
-         //   let id = decodedData.weather[0].id
-         //   let temp = decodedData.main.temp
-            let name = decodedData.name
+            
+            return decodedData
+            
+        } catch {
+            self.delegate?.didFailWithError(error: error)
+            return nil
+        }
+    }
+    
+    func parsePokemonList(_ list: Data) -> PokemonList?{
+        let decoder = JSONDecoder()
+        do{
+            let decodedData = try decoder.decode(PokemonList.self, from: list)
+            print("Count: \(decodedData.count)")
             
             return decodedData
             

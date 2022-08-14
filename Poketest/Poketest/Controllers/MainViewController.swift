@@ -15,14 +15,17 @@ class MainViewController: UIViewController {
     
     
     var pokemonManager = PokemonManager()
+    var pokemonList : [Pokemon]?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         pokemonManager.delegate = self
         
-        pokemonManager.fetchPokemon(name: "bulbasaur")
+        //pokemonManager.fetchPokemon(name: "bulbasaur")
         
+        pokemonManager.fetchListPokemons(start: 0)
     }
     
 
@@ -44,10 +47,12 @@ extension MainViewController : PokemonManagerDelegate{
         print(pokemon.name)
         print(pokemon.sprites?.frontDefault)
         DispatchQueue.main.async {
-            self.pokemonNameLabel.text = pokemon.name
+            self.pokemonList?.append(pokemon)
+            
+          /*  self.pokemonNameLabel.text = pokemon.name
             if let url = pokemon.sprites?.frontDefault{
                 self.pokemonImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "placeholder.png"))
-            }
+            } */
         }
         
     }

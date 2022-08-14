@@ -118,6 +118,7 @@ struct Sprites : Codable {
     let frontFemale: String?
     let frontShiny: String?
     let frontShinyFemale: String?
+    let other: Other?
     
     enum CodingKeys: String, CodingKey {
         case backDefault = "back_default"
@@ -128,6 +129,7 @@ struct Sprites : Codable {
         case frontFemale = "front_female"
         case frontShiny = "front_shiny"
         case frontShinyFemale = "front_shiny_female"
+        case other = "other"
     }
     
     init(from decoder: Decoder) throws {
@@ -140,6 +142,7 @@ struct Sprites : Codable {
         frontFemale = try values.decodeIfPresent(String.self, forKey: .frontFemale)
         frontShiny = try values.decodeIfPresent(String.self, forKey: .frontShiny)
         frontShinyFemale = try values.decodeIfPresent(String.self, forKey: .frontShinyFemale)
+        other = try values.decodeIfPresent(Other.self, forKey: .other)
     }
 }
 
