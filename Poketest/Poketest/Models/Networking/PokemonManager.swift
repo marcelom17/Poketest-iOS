@@ -10,7 +10,7 @@ import Foundation
 protocol PokemonManagerDelegate{
     func didUpdatePokemon(_ pokemonManager: PokemonManager, pokemon: Pokemon)
     func didFailWithError(error: Error)
-    func didFetchNextPokemons(startPosition: Int)
+    func didFetchList(pokemonList: PokemonList, startPosition: Int)
 }
 
 struct PokemonManager {
@@ -67,13 +67,8 @@ struct PokemonManager {
                     } else {
                         if let pokemonList = parsePokemonList(safeData){
                             
-                            self.delegate?.didFetchNextPokemons(startPosition: pokemonList.count > startPaginationValue ? startPaginationValue + 20 : -1)
+                            self.delegate?.didFetchList(pokemonList: pokemonList, startPosition: pokemonList.count > startPaginationValue ? startPaginationValue + 20 : -1)
                             
-                            for poke in pokemonList.results {
-                                if let url = poke?.url{
-                                    performRequest(with: url)
-                                }
-                            }
                         }
                     }
                 }
