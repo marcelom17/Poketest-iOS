@@ -130,6 +130,7 @@ extension PokemonListTableViewController: UITableViewDataSourcePrefetching{
 //MARK: - Pokemon Manager Delegate
 extension PokemonListTableViewController : PokemonManagerDelegate{
     func didFetchList(pokemonList: PokemonList, startPosition: Int) {
+        pokemonManager.isFetchInProgress = false
         pokemonManager.startPaginationValue = startPosition
         for poke in pokemonList.results {
             if let url = poke?.url{

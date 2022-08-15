@@ -12,6 +12,9 @@ struct Const {
     static let cellNibName = "PokemonListTableViewCell"
     static let detailsSegue = "pokeDetailsSegue"
     
+    //Network
+    static let baseURL = "https://pokeapi.co/api/v2/"
+    
     struct Colors{
         static let navigationRed = "BaseRedColor"
     }

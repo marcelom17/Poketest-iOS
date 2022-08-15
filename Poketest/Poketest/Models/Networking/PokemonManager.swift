@@ -13,61 +13,54 @@ protocol PokemonManagerDelegate{
     func didFetchList(pokemonList: PokemonList, startPosition: Int)
 }
 
-struct PokemonManager {
-    let baseURL = "https://pokeapi.co/api/v2/"
+final class PokemonManager {
     var delegate: PokemonManagerDelegate?
     let paginationSize = 20
     var startPaginationValue = 0
-    private var isFetchInProgress = false
+    var isFetchInProgress = false
     
     
     func fetchListPokemons(){
-        let urlString = "\(baseURL)/pokemon?offset=\(startPaginationValue)&limit=\(paginationSize)"
+        let urlString = "\(Const.baseURL)/pokemon?offset=\(startPaginationValue)&limit=\(paginationSize)"
         print(urlString)
-        
+        guard !isFetchInProgress else{
+            print("already fetching list")
+            return
+        }
+        isFetchInProgress = true
+
         performRequest(with: urlString, isDetails: false)
 
     }
     
     //function to be called when searching
     func fetchPokemon(name: String){
-        let urlString = "\(baseURL)/pokemon/\(name)"
+        let urlString = "\(Const.baseURL)/pokemon/\(name)"
         print(urlString)
-        
         performRequest(with: urlString)
     }
     
     
     func performRequest(with urlString: String, isDetails: Bool = true){
-        // 1. Create URL
-        // 2. Create URLSession
-        // 3. Give the session a task
-        // 4. Start the Task
-        guard !isFetchInProgress else{
-            return
-        }
-        
-    //    isFetchInProgress = true
         
         if let url = URL(string: urlString){ //1
             let session = URLSession(configuration: .default) //2
             let task = session.dataTask(with: url) { data, response, error in //3 using clousers
                 if error != nil{
-                  //  isFetchInProgress = false
+                    self.isFetchInProgress = false
                     self.delegate?.didFailWithError(error: error!)
                     return
                 }
                 
                 if let safeData = data{
                     if isDetails{
-                        if let pokemon = parsePokemonDetails(safeData){
-                            //isFetchInProgress = false
+                        if let pokemon = self.parsePokemonDetails(safeData){
                             self.delegate?.didUpdatePokemon(self, pokemon: pokemon)
                         }
                     } else {
-                        if let pokemonList = parsePokemonList(safeData){
-                            
-                            self.delegate?.didFetchList(pokemonList: pokemonList, startPosition: pokemonList.count > startPaginationValue ? startPaginationValue + 20 : -1)
+                        if let pokemonList = self.parsePokemonList(safeData){
+                            self.isFetchInProgress = false
+                            self.delegate?.didFetchList(pokemonList: pokemonList, startPosition: pokemonList.count > self.startPaginationValue ? self.startPaginationValue + 20 : -1)
                             
                         }
                     }
