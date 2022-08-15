@@ -15,6 +15,10 @@ struct Const {
     //Network
     static let baseURL = "https://pokeapi.co/api/v2/"
     
+    struct Images{
+        static let titleIcon = "TitleImage"
+    }
+    
     struct Colors{
         static let navigationRed = "BaseRedColor"
     }

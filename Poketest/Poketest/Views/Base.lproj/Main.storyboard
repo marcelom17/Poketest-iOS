@@ -15,7 +15,7 @@
             <objects>
                 <viewController id="Y7e-X8-pKV" userLabel="Main" customClass="PokemonDetailsViewController" customModule="Poketest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bra-Q0-JX0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Main Page " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBP-4I-ksP">
@@ -36,8 +36,10 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="H67-7G-U2I">
                         <imageReference key="selectedImage" image="house" catalog="system" symbolScale="default"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" title="Pokemon" id="AvF-Sz-64a">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="FD6-bL-5Fa"/>
+                    <navigationItem key="navigationItem" title="Pokemon" largeTitleDisplayMode="always" id="AvF-Sz-64a">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="FD6-bL-5Fa">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="pokemonImage" destination="RSe-7C-SSO" id="upb-lM-nA4"/>
@@ -48,12 +50,12 @@
             </objects>
             <point key="canvasLocation" x="1752" y="-753"/>
         </scene>
-        <!--PokeTest-->
+        <!--Pokemon List Table View Controller-->
         <scene sceneID="eYt-3a-l8u">
             <objects>
-                <tableViewController id="ojg-3G-Ycy" customClass="PokemonListTableViewController" customModule="Poketest" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="ojg-3G-Ycy" customClass="PokemonListTableViewController" customModule="Poketest" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Z8m-vt-wCi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="bdc-CR-HOI">
@@ -66,13 +68,15 @@
                             <outlet property="delegate" destination="ojg-3G-Ycy" id="bId-lE-nYV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="PokeTest" id="rvt-gK-goZ">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="6uA-8w-iar"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="rvt-gK-goZ">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="6uA-8w-iar">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="bdc-CR-HOI" id="HwM-Yd-pEx"/>
                         <outlet property="tableView" destination="Z8m-vt-wCi" id="q57-cM-vME"/>
-                        <segue destination="Y7e-X8-pKV" kind="show" identifier="goToDetails" id="TxK-E8-P0S"/>
+                        <segue destination="Y7e-X8-pKV" kind="show" identifier="pokeDetailsSegue" id="TxK-E8-P0S"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rYl-Ju-aBZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -83,11 +87,11 @@
         <scene sceneID="bH6-jM-Tnh">
             <objects>
                 <navigationController id="AiL-aQ-kzg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Fm3-Jc-3Rj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="Fm3-Jc-3Rj">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" name="BaseRedColor"/>
-                        <color key="tintColor" name="BaseRedColor"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" name="BaseRedColor"/>
                     </navigationBar>
                     <connections>
@@ -103,7 +107,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <namedColor name="BaseRedColor">
-            <color red="0.93725490196078431" green="0.32549019607843138" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.93699997663497925" green="0.32499998807907104" blue="0.31400001049041748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

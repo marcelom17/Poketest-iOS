@@ -19,6 +19,7 @@ final class PokemonManager {
     var startPaginationValue = 0
     var isFetchInProgress = false
     
+    //TODO - Add loading when fetching data
     
     func fetchListPokemons(){
         let urlString = "\(Const.baseURL)/pokemon?offset=\(startPaginationValue)&limit=\(paginationSize)"
@@ -75,7 +76,6 @@ final class PokemonManager {
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(Pokemon.self, from: pokemon)
-            print("Name: \(decodedData.name)")
             
             return decodedData
             

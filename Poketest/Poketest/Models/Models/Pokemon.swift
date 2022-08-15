@@ -129,7 +129,7 @@ struct Sprites : Codable {
         case frontFemale = "front_female"
         case frontShiny = "front_shiny"
         case frontShinyFemale = "front_shiny_female"
-        case other = "other"
+        case other
     }
     
     init(from decoder: Decoder) throws {
@@ -148,28 +148,31 @@ struct Sprites : Codable {
 
 // MARK: - Other
 struct Other : Codable {
-    let dreamWorld: DreamWorld?
-    let home: Home?
     let officialArtwork: OfficialArtwork?
+    
+    enum CodingKeys: String, CodingKey {
+        case officialArtwork = "official-artwork"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        officialArtwork = try values.decodeIfPresent(OfficialArtwork.self, forKey: .officialArtwork)
+    }
 }
 
-// MARK: - DreamWorld
-struct DreamWorld : Codable {
-    let frontDefault: String?
-    let frontFemale: String?
-}
-
-// MARK: - Home
-struct Home : Codable {
-    let frontDefault: String?
-    let frontFemale: String?
-    let frontShiny: String?
-    let frontShinyFemale: String?
-}
 
 // MARK: - OfficialArtwork
 struct OfficialArtwork : Codable {
     let frontDefault: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        frontDefault = try values.decodeIfPresent(String.self, forKey: .frontDefault)
+    }
 }
 
 
