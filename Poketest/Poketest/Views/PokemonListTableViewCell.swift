@@ -10,7 +10,8 @@ import UIKit
 class PokemonListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var pokemonImage: UIImageView!
-    @IBOutlet weak var pokemonLabel: UILabel!
+    @IBOutlet weak var pokemonNameLabel: UILabel!
+    @IBOutlet weak var pokemonIDLabel: UILabel!
     
     
     override func awakeFromNib() {

@@ -26,6 +26,7 @@
 		CDDED00C28A9755600756F40 /* PokemonListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDED00A28A9755600756F40 /* PokemonListTableViewCell.swift */; };
 		CDDED00D28A9755600756F40 /* PokemonListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDDED00B28A9755600756F40 /* PokemonListTableViewCell.xib */; };
 		CDDED00F28A97C4B00756F40 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDED00E28A97C4B00756F40 /* Constants.swift */; };
+		CDDED01228AA68FE00756F40 /* PokemonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDED01128AA68FE00756F40 /* PokemonListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		CDDED00A28A9755600756F40 /* PokemonListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListTableViewCell.swift; sourceTree = "<group>"; };
 		CDDED00B28A9755600756F40 /* PokemonListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PokemonListTableViewCell.xib; sourceTree = "<group>"; };
 		CDDED00E28A97C4B00756F40 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CDDED01128AA68FE00756F40 /* PokemonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewModel.swift; sourceTree = "<group>"; };
 		CEFC6D47959DBED8D9D77BE9 /* Pods-Poketest-PoketestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Poketest-PoketestUITests.release.xcconfig"; path = "Target Support Files/Pods-Poketest-PoketestUITests/Pods-Poketest-PoketestUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,6 +142,7 @@
 		CDDECFBB28A6CEE600756F40 /* Poketest */ = {
 			isa = PBXGroup;
 			children = (
+				CDDED01028AA68DF00756F40 /* ViewModels */,
 				CDDECFEF28A6DBDE00756F40 /* Controllers */,
 				CDDECFEC28A6D9C300756F40 /* Models */,
 				CDDECFED28A6D9DA00756F40 /* Views */,
@@ -174,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				CDDECFF928A91A9400756F40 /* Models */,
-				CDDECFF628A72AC700756F40 /* Requester */,
+				CDDECFF628A72AC700756F40 /* Networking */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -198,12 +201,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		CDDECFF628A72AC700756F40 /* Requester */ = {
+		CDDECFF628A72AC700756F40 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				CDDECFF728A72AEA00756F40 /* PokemonManager.swift */,
 			);
-			path = Requester;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		CDDECFF928A91A9400756F40 /* Models */ = {
@@ -213,6 +216,14 @@
 				CDDECFFA28A91AB000756F40 /* PokemonList.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CDDED01028AA68DF00756F40 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CDDED01128AA68FE00756F40 /* PokemonListViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		E3096F1EE7FDE3EDD863CD22 /* Pods */ = {
@@ -476,6 +487,7 @@
 				CDDECFF128A6DC3F00756F40 /* PokemonDetailsViewController.swift in Sources */,
 				CDDECFFF28A965D700756F40 /* PokemonListTableViewController.swift in Sources */,
 				CDDECFFB28A91AB000756F40 /* PokemonList.swift in Sources */,
+				CDDED01228AA68FE00756F40 /* PokemonListViewModel.swift in Sources */,
 				CDDED00F28A97C4B00756F40 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
