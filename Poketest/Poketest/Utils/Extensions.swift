@@ -18,4 +18,12 @@ extension String {
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
+    
+    func addingComa() -> String {
+        return dropLast() + "," + suffix(1)
+    }
+
+    mutating func addComaToValue() {
+        self = self.addingComa()
+    }
 }

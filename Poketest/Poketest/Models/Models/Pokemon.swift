@@ -181,6 +181,20 @@ struct OfficialArtwork : Codable {
 struct Stat : Codable {
     let baseStat, effort: Int?
     let stat: Species?
+    
+    enum CodingKeys: String, CodingKey {
+        case baseStat = "base_stat"
+        case effort
+        case stat
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        baseStat = try values.decodeIfPresent(Int.self, forKey: .baseStat)
+        effort = try values.decodeIfPresent(Int.self, forKey: .effort)
+        stat = try values.decodeIfPresent(Species.self, forKey: .stat)
+    }
+    
 }
 
 // MARK: - TypeElement
