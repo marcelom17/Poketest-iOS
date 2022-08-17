@@ -17,7 +17,7 @@ class PokemonDetailsViewController: UIViewController {
     @IBOutlet weak var pokemonType2Label: UILabel!
     @IBOutlet weak var pokemonHeightLabel: UILabel!
     @IBOutlet weak var pokemonWeightLabel: UILabel!
-    @IBOutlet weak var pokemonCategoryValueLabel: UILabel!
+    @IBOutlet weak var pokemonRandomMoveValueLabel: UILabel!
     @IBOutlet weak var pokemonAbilitiesValueLabel: UILabel!
     
     @IBOutlet weak var pokemonAttackValueLabel: UILabel!
@@ -83,8 +83,12 @@ class PokemonDetailsViewController: UIViewController {
             //size
             pokemonHeightLabel.text = "\(String(safePokemon.height!).addingComa()) m"
             pokemonWeightLabel.text = "\(String(safePokemon.weight!).addingComa()) kg"
-            //category
-            //pokemonCategoryValueLabel.text = safePokemon.
+            //Abilities
+            pokemonAbilitiesValueLabel.text = safePokemon.abilities[0]?.ability?.name?.capitalizingFirstLetter()
+            //Random Move
+            if let randomMove = safePokemon.moves?.randomElement(){
+                pokemonRandomMoveValueLabel.text = randomMove.move?.name?.capitalizingFirstLetter()
+            }
 
         }
     }

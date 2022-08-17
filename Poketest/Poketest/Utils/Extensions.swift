@@ -7,8 +7,6 @@
 
 import Foundation
 
-//For status bar color
-
 //To Capitalize first letter of name 
 extension String {
     func capitalizingFirstLetter() -> String {
@@ -20,7 +18,9 @@ extension String {
     }
     
     func addingComa() -> String {
-        return dropLast() + "," + suffix(1)
+        let prefix = dropLast().isEmpty ? "0" : dropLast()
+
+        return prefix + "," + suffix(1)
     }
 
     mutating func addComaToValue() {

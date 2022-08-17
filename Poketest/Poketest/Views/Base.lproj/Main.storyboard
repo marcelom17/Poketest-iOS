@@ -216,7 +216,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="cra-k3-bZE">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="21.666666666666668"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTX-vc-JFV" userLabel="Category">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Random Move" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTX-vc-JFV" userLabel="Category">
                                                 <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="21.666666666666668"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="hp"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -290,11 +290,11 @@
                     <connections>
                         <outlet property="pokemonAbilitiesValueLabel" destination="Ed7-nA-DIy" id="6cZ-zV-9AV"/>
                         <outlet property="pokemonAttackValueLabel" destination="Fwx-eq-39m" id="1fK-LF-36C"/>
-                        <outlet property="pokemonCategoryValueLabel" destination="Aff-oz-aE2" id="Dtg-jE-v2J"/>
                         <outlet property="pokemonDefenseValueLabel" destination="3xG-hv-3vK" id="x32-OK-h5a"/>
                         <outlet property="pokemonHPLabel" destination="gST-Ic-TFJ" id="h1t-FX-a2y"/>
                         <outlet property="pokemonHeightLabel" destination="DFD-p7-H9r" id="YiG-gJ-I4B"/>
                         <outlet property="pokemonImage" destination="RSe-7C-SSO" id="upb-lM-nA4"/>
+                        <outlet property="pokemonRandomMoveValueLabel" destination="Aff-oz-aE2" id="Dtg-jE-v2J"/>
                         <outlet property="pokemonSpecialAttackValueLabel" destination="34k-fx-FOG" id="k6x-LV-uTc"/>
                         <outlet property="pokemonSpecialDefenseValueLabel" destination="tel-x7-ebg" id="H9r-cf-Q11"/>
                         <outlet property="pokemonSpeedValueLabel" destination="i3E-Lm-qDl" id="ANf-BU-onz"/>

@@ -17,16 +17,13 @@ struct Pokemon : Codable{
     let abilities: [Ability?]
     let baseExperience: Int?
     let forms: [Species?]
-    let gameIndices: [GameIndex?]
     let height: Int?
- //   let heldItems: [Any?]
     let id: Int
     let isDefault: Bool
     let locationAreaEncounters: String?
     let moves: [Move]?
     let name: String?
     let order: Int?
-  //  let pastTypes: [Any?]
     let species: Species?
     let sprites: Sprites?
     let stats: [Stat]?
@@ -35,19 +32,15 @@ struct Pokemon : Codable{
     
     enum CodingKeys: String, CodingKey {
         case baseExperience = "base_experience"
-        case gameIndices = "game_indices"
         case isDefault = "is_default"
         case locationAreaEncounters = "location_area_encounters"
-        
         case abilities = "abilities"
         case forms = "forms"
         case height = "height"
-      //  case held_items = "held_items"
         case id = "id"
         case moves = "moves"
         case name = "name"
         case order = "order"
-     //   case past_types = "past_types"
         case species = "species"
         case sprites = "sprites"
         case stats = "stats"
@@ -58,7 +51,6 @@ struct Pokemon : Codable{
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
             baseExperience = try values.decodeIfPresent(Int.self, forKey: .baseExperience)
-            gameIndices = try values.decodeIfPresent([GameIndex?].self, forKey: .gameIndices)!
             isDefault = try values.decodeIfPresent(Bool.self, forKey: .isDefault)!
             locationAreaEncounters = try values.decodeIfPresent(String.self, forKey: .locationAreaEncounters)
             abilities = try values.decodeIfPresent([Ability?].self, forKey: .abilities)!
@@ -68,7 +60,6 @@ struct Pokemon : Codable{
             moves = try values.decodeIfPresent([Move].self, forKey: .moves)
             name = try values.decodeIfPresent(String.self, forKey: .name)
             order = try values.decodeIfPresent(Int.self, forKey: .order)
-            //past_types = try values.decodeIfPresent([String].self, forKey: .past_types)
             species = try values.decodeIfPresent(Species.self, forKey: .species)
             sprites = try values.decodeIfPresent(Sprites.self, forKey: .sprites)
             stats = try values.decodeIfPresent([Stat].self, forKey: .stats)
@@ -82,6 +73,21 @@ struct Ability : Codable {
     let ability: Species?
     let isHidden: Bool?
     let slot: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case ability
+        case isHidden = "is_hidden"
+        case slot
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        ability = try values.decodeIfPresent(Species.self, forKey: .ability)
+        isHidden = try values.decodeIfPresent(Bool.self, forKey: .isHidden)
+        slot = try values.decodeIfPresent(Int.self, forKey: .slot)
+
+    }
+            
 }
 
 // MARK: - Species
@@ -90,11 +96,6 @@ struct Species : Codable{
     let url: String?
 }
 
-// MARK: - GameIndex
-struct GameIndex : Codable {
-    let gameIndex: Int?
-    let version: Species?
-}
 
 // MARK: - Move
 struct Move : Codable {
