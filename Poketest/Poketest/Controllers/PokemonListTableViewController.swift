@@ -34,7 +34,7 @@ class PokemonListTableViewController: UITableViewController {
         guard let navBar = navigationController else {
             fatalError("Navigation controller does not exist.")
         }
-        navBar.setStatusBar(backgroundColor: UIColor(named: Const.Colors.navigationRed)!)
+        //navBar.setStatusBar(backgroundColor: UIColor(named: Const.Colors.navigationRed)!) //don't use with landscape on
         navigationItem.titleView = UIImageView(image: UIImage(named: Const.Images.titleIcon))
         
     }
@@ -71,55 +71,14 @@ class PokemonListTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
     
     // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
         let destinationVC = segue.destination as! PokemonDetailsViewController
         if let indexPath = tableView.indexPathForSelectedRow{
             destinationVC.pokemon = pokemonList[indexPath.row]
         }
     }
-    
-    
 }
 
 
@@ -132,7 +91,6 @@ extension PokemonListTableViewController: UITableViewDataSourcePrefetching{
             }
         }
     }
-    
     
 }
 
@@ -158,11 +116,6 @@ extension PokemonListTableViewController : PokemonManagerDelegate{
         DispatchQueue.main.async {
             self.pokemonList.append(pokemon)
             self.pokemonList = self.pokemonList.sorted(by: { $0.id < $1.id })
-            /*do{
-             
-             } catch {
-             print("Error sortinng array: \(error)")
-             }*/
             self.tableView.reloadData()
         }
         
@@ -171,21 +124,20 @@ extension PokemonListTableViewController : PokemonManagerDelegate{
     func didFailWithError(error: Error) {
         print(error)
         //need to define what to do when error getting pokemon
-        
     }
 }
 
 
 //MARK: - SearchBar Delegate
 extension PokemonListTableViewController : UISearchBarDelegate{
-    
+    //search list or fetch from api?
 }
 
 
 //MARK: - Change Status Bar Color
 extension UINavigationController {
     
-    func setStatusBar(backgroundColor: UIColor) {
+    func setStatusBar(backgroundColor: UIColor) { //don't use when app can be in landscape, the subView will be on top on tha navigationController
         let statusBarFrame: CGRect
         if #available(iOS 13.0, *) {
             statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
