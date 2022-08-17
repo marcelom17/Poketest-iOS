@@ -49,9 +49,9 @@ class PokemonDetailsViewController: UIViewController {
     func loadData(){
         if let safePokemon = pokemon{
             if let pokeImgURL = safePokemon.sprites?.other?.officialArtwork?.frontDefault{
-                pokemonImage.sd_setImage(with: URL(string: pokeImgURL), placeholderImage: UIImage(named: "placeholder.png"))
+                pokemonImage.sd_setImage(with: URL(string: pokeImgURL), placeholderImage: UIImage(named: "Pokeball"))
             } else if let defaultURL = safePokemon.sprites?.frontDefault{
-                pokemonImage.sd_setImage(with: URL(string: defaultURL), placeholderImage: UIImage(named: "placeholder.png"))
+                pokemonImage.sd_setImage(with: URL(string: defaultURL), placeholderImage: UIImage(named: "Pokeball"))
             }
             //        stats
             if let pokeHp = safePokemon.stats?.filter({$0.stat?.name == "hp"}) {

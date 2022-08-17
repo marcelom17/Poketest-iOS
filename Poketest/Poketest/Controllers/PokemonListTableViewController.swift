@@ -60,7 +60,7 @@ class PokemonListTableViewController: UITableViewController {
         cell.pokemonNameLabel.text = pokemon.name?.capitalizingFirstLetter() //need to Capitalize first letter
         cell.pokemonIDLabel.text = String(format: "%04d", pokemon.id)
         if let url = pokemon.sprites?.frontDefault{
-            cell.pokemonImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "placeholder.png"))
+            cell.pokemonImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "Pokeball"))
         }
         
         return cell
@@ -68,6 +68,7 @@ class PokemonListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: Const.detailsSegue, sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     /*
