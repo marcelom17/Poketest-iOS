@@ -18,7 +18,7 @@ final class PokemonListViewModel{
     
     private var pokemonsList: [PokemonList] = []
     private let paginationSize = 20
-    var startPaginationValue = 0
+    private var startPaginationValue = 0
     private var isFetchInProgress = false
  
     let pokemonManager: PokemonManager
@@ -42,4 +42,6 @@ final class PokemonListViewModel{
         
         pokemonManager.performRequest(with: urlString)
     }
+    
+    
 }

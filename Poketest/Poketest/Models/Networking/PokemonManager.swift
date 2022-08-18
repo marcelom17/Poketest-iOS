@@ -61,7 +61,7 @@ final class PokemonManager {
                     } else {
                         if let pokemonList = self.parsePokemonList(safeData){
                             self.isFetchInProgress = false
-                            self.delegate?.didFetchList(pokemonList: pokemonList, startPosition: pokemonList.count > self.startPaginationValue ? self.startPaginationValue + 20 : -1)
+                            self.delegate?.didFetchList(pokemonList: pokemonList, startPosition: pokemonList.count > self.startPaginationValue ? self.startPaginationValue + self.paginationSize : -1)
                             
                         }
                     }
