@@ -12,15 +12,14 @@ class PokemonListTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    private var viewModel : PokemonListViewModel!
     var pokemonManager = PokemonManager()
-    var pokemonList = [Pokemon]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        pokemonManager.delegate = self
+        viewModel = PokemonListViewModel.init(pokemonManager: pokemonManager, delegate: self)
         tableView.prefetchDataSource = self
-        pokemonManager.fetchListPokemons()
+        viewModel.fetchListPokemons()
         searchBar.delegate = self
         
         tableView.register(UINib(nibName: Const.cellNibName, bundle: nil), forCellReuseIdentifier: Const.cellIdentifier)
@@ -35,7 +34,7 @@ class PokemonListTableViewController: UITableViewController {
             fatalError("Navigation controller does not exist.")
         }
         //navBar.setStatusBar(backgroundColor: UIColor(named: Const.Colors.navigationRed)!) //don't use with landscape on
-        navigationItem.titleView = UIImageView(image: UIImage(named: Const.Images.titleIcon))
+        navBar.navigationItem.titleView = UIImageView(image: UIImage(named: Const.Images.titleIcon))
         
     }
     
@@ -48,7 +47,7 @@ class PokemonListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return pokemonList.count
+        return viewModel.getPokemonList().count
     }
     
     
@@ -56,7 +55,7 @@ class PokemonListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: Const.cellIdentifier, for: indexPath) as! PokemonListTableViewCell
         
         // Configure the cell...
-        let pokemon = pokemonList[indexPath.row]
+        let pokemon = viewModel.getPokemonList()[indexPath.row]
         cell.pokemonNameLabel.text = pokemon.name?.capitalizingFirstLetter() //need to Capitalize first letter
         cell.pokemonIDLabel.text = String(format: "%04d", pokemon.id)
         if let url = pokemon.sprites?.frontDefault{
@@ -76,7 +75,7 @@ class PokemonListTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! PokemonDetailsViewController
         if let indexPath = tableView.indexPathForSelectedRow{
-            destinationVC.pokemon = pokemonList[indexPath.row]
+            destinationVC.pokemon = viewModel.getPokemonList()[indexPath.row]
         }
     }
 }
@@ -85,37 +84,22 @@ class PokemonListTableViewController: UITableViewController {
 //MARK: - TableVie DataSource Prefetching
 extension PokemonListTableViewController: UITableViewDataSourcePrefetching{
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths[0].row >= pokemonList.count - 5{
-            if(pokemonManager.startPaginationValue != -1){
+    /*    if indexPaths[0].row >= pokemonList.count - 5{
+            if(viewModel.startPaginationValue != -1){
                 pokemonManager.fetchListPokemons()
             }
-        }
+        } */
     }
     
 }
 
+
 //MARK: - Pokemon Manager Delegate
-extension PokemonListTableViewController : PokemonManagerDelegate{
-    func didFetchList(pokemonList: PokemonList, startPosition: Int) {
-        pokemonManager.isFetchInProgress = false
-        pokemonManager.startPaginationValue = startPosition
-        for poke in pokemonList.results {
-            if let url = poke?.url{
-                pokemonManager.performRequest(with: url)
-            }
-        }
-    }
+extension PokemonListTableViewController : PokemonListViewModelDelegate{
     
-    func didFetchNextPokemons(startPosition: Int) {
-        pokemonManager.startPaginationValue = startPosition
-    }
-    
-    func didUpdatePokemon(_ pokemonManager: PokemonManager, pokemon: Pokemon) {
-        print(pokemon.name)
-        print(pokemon.sprites?.frontDefault)
+    func didUpdatePokemon() { //only should be called when
         DispatchQueue.main.async {
-            self.pokemonList.append(pokemon)
-            self.pokemonList = self.pokemonList.sorted(by: { $0.id < $1.id })
+         //   self.getPokemonList() = self.getPokemonList().sorted(by: { $0.id < $1.id })
             self.tableView.reloadData()
         }
         
