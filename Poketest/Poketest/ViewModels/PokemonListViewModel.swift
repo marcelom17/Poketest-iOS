@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokemonListViewModelDelegate{
-    func didUpdatePokemon()
+    func didUpdatePokemons()
     func didFailWithError(error: Error)
 }
 
@@ -89,7 +89,10 @@ class PokemonListViewModel{
                     print("Name: \(pokemon.name ?? "-")")
                     print("Image url: \(pokemon.sprites?.frontDefault ?? "-")")
                     self.pokemonsList.append(pokemon)
-                    self.delegate?.didUpdatePokemon()
+                    if self.pokemonsList.count == self.startPaginationValue{ //only should call when all pokemons downloaded. Should be done by list probably
+                        self.sortPokemonListbyID()
+                        self.delegate?.didUpdatePokemons()
+                    }
                 }
             }
         }
@@ -99,6 +102,13 @@ class PokemonListViewModel{
         return pokemonsList
     }
     
+    private func sortPokemonListbyID(){
+        pokemonsList = pokemonsList.sorted(by: { $0.id < $1.id })
+    }
+    
+    func getIndexPathToFetch() -> IndexPath {
+        return IndexPath(row: pokemonsList.count-5, section: 0)
+    }
     
 }
 

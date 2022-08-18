@@ -34,19 +34,17 @@ class PokemonListTableViewController: UITableViewController {
             fatalError("Navigation controller does not exist.")
         }
         //navBar.setStatusBar(backgroundColor: UIColor(named: Const.Colors.navigationRed)!) //don't use with landscape on
-        navBar.navigationItem.titleView = UIImageView(image: UIImage(named: Const.Images.titleIcon))
-        
+        navigationItem.titleView = UIImageView(image: UIImage(named: Const.Images.titleIcon))
+        navigationController?.setStatusBarStyle(.default)
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         //maybe separate by generations?
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return viewModel.getPokemonList().count
     }
     
@@ -54,12 +52,11 @@ class PokemonListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Const.cellIdentifier, for: indexPath) as! PokemonListTableViewCell
         
-        // Configure the cell...
         let pokemon = viewModel.getPokemonList()[indexPath.row]
         cell.pokemonNameLabel.text = pokemon.name?.capitalizingFirstLetter() //need to Capitalize first letter
         cell.pokemonIDLabel.text = String(format: "%04d", pokemon.id)
         if let url = pokemon.sprites?.frontDefault{
-            cell.pokemonImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "Pokeball"))
+            cell.pokemonImage.sd_setImage(with: URL(string: url))
         }
         
         return cell
@@ -84,11 +81,10 @@ class PokemonListTableViewController: UITableViewController {
 //MARK: - TableVie DataSource Prefetching
 extension PokemonListTableViewController: UITableViewDataSourcePrefetching{
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-    /*    if indexPaths[0].row >= pokemonList.count - 5{
-            if(viewModel.startPaginationValue != -1){
-                pokemonManager.fetchListPokemons()
-            }
-        } */
+        let indexPath = viewModel.getIndexPathToFetch()
+        if indexPaths[0].row >= indexPath.row{
+            viewModel.fetchListPokemons()
+        }
     }
     
 }
@@ -97,9 +93,8 @@ extension PokemonListTableViewController: UITableViewDataSourcePrefetching{
 //MARK: - Pokemon Manager Delegate
 extension PokemonListTableViewController : PokemonListViewModelDelegate{
     
-    func didUpdatePokemon() { //only should be called when
+    func didUpdatePokemons() { //only should be called when
         DispatchQueue.main.async {
-         //   self.getPokemonList() = self.getPokemonList().sorted(by: { $0.id < $1.id })
             self.tableView.reloadData()
         }
         
