@@ -1,7 +1,7 @@
 # Poketest-iOS
 IOS project that uses PokeAPI to show Pokemon details.
 
-Got a list of Pokemons with pagination, selecting one, it will show Details of Pokemon
+Got a list of Pokemons with pagination, selecting one, will show Details of Pokemon
 
 ![IMG_7873](https://user-images.githubusercontent.com/20685385/185645176-7cc9c6e7-3de1-423e-907c-ded02864c86c.PNG)
 
