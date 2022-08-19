@@ -48,4 +48,19 @@ class MockPokemonManager: TypePokemonManager {
             task.resume()
         }
     }
+    
+    func loadLocalJson(filename: String) -> Pokemon? {
+        let testBundle = Bundle(for: type(of: self))
+        if let url = testBundle.url(forResource: filename, withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode(Pokemon.self, from: data)
+                return jsonData
+            } catch {
+                return nil
+            }
+        }
+        return nil
+    }
 }

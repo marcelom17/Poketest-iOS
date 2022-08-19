@@ -9,7 +9,6 @@ import XCTest
 @testable import Poketest
 
 class PokemonManagerTests: XCTestCase {
-    
     var pokemonManager : MockPokemonManager!
     var queue : DispatchQueue!
     
@@ -28,13 +27,8 @@ class PokemonManagerTests: XCTestCase {
     }
 
     func testListFetch() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         let startVal = 0
-        let sizeList = 20
+        let sizeList = 10
         let url = "\(Const.baseURL)/pokemon?offset=\(startVal)&limit=\(sizeList)"
         
         
@@ -49,8 +43,7 @@ class PokemonManagerTests: XCTestCase {
         }
     }
     
-    func testListFetchError() throws {
-
+    func testListFetch20() throws {
         let startVal = 0
         let sizeList = 0
         let url = "\(Const.baseURL)/pokemon?offset=\(startVal)&limit=\(sizeList)"
@@ -61,9 +54,43 @@ class PokemonManagerTests: XCTestCase {
                 XCTFail("Error getting list: \(error)")
                 
             case .success(let list):
-                XCTAssertEqual(list.results.count, sizeList)
+                XCTAssertEqual(list.results.count, 20) //no size -> default 20
             }
         }
     }
 
+    func testFetchPokemonDetails() throws{
+        let id = 6
+        let url = "\(Const.baseURL)/pokemon/\(id)"
+        let localPokemon = pokemonManager.loadLocalJson(filename: "pokemon6")
+        XCTAssertNotNil(localPokemon)
+        
+        pokemonManager.performDetailsRequest(with: url, queue: queue) { result in
+            switch result{
+                case .failure(let error):
+                    XCTFail("Error getting list: \(error)")
+                    
+                case .success(let pokemon):
+                    XCTAssertEqual(pokemon, localPokemon)
+            }
+        }
+    }
+    
+    func testFetchPokemonDetailsError() throws{
+        let id = 7
+        let url = "\(Const.baseURL)/pokemon/\(id)"
+        let localPokemon = pokemonManager.loadLocalJson(filename: "pokemon6")
+        XCTAssertNotNil(localPokemon)
+        
+        pokemonManager.performDetailsRequest(with: url, queue: queue) { result in
+            switch result{
+                case .failure(let error):
+                    XCTFail("Error getting list: \(error)")
+                    
+                case .success(let pokemon):
+                    XCTAssertNotEqual(pokemon, localPokemon)
+            }
+        }
+    }
+    
 }
