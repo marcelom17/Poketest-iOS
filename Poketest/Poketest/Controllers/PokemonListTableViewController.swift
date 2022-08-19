@@ -20,7 +20,7 @@ class PokemonListTableViewController: UITableViewController {
         viewModel = PokemonListViewModel.init(pokemonManager: pokemonManager, delegate: self)
         tableView.prefetchDataSource = self
         viewModel.fetchListPokemons(startValue: viewModel.getStartPaginationValue(), paginationSize: viewModel.getPaginationSize())
-        searchBar.delegate = self
+        //searchBar.delegate = self
         
         tableView.register(UINib(nibName: Const.cellNibName, bundle: nil), forCellReuseIdentifier: Const.cellIdentifier)
         
