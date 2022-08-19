@@ -1,0 +1,11 @@
+Started the project by thinking about what the app should be showing to the user, in this case, a list of Pokemon’s (because of Pagination) with a detailed view when selecting one.
+Moved to testing the API, trying to get all the data needed, but api is not that straight forward, so tried to find a solution to get the required information using the API way, because Pokemon list objects only got name + details url, so to show list of 20 Pokemon’s with an image, got to do 41 requests (list + Pokemon details + image).
+Got all the details info to show, so started mocking & creating views, doing orientation changes for details, adding favorites button & search bar. Wanted to have the view with colors regarding the main type of Pokemon, but didn’t add in time.
+Added some external libraries using Pods, with the only one used being SDWebImage, Chameleon was to use for the colors implementation.
+Started developing the project using MVC as it was the design pattern I was more used to on iOS developing, having a full functioning version with all the basics done with MVC.
+But with the addition of Dependency Injection & thinking of Unit Testing, started migrating to MVVM. 
+As I've never worked with Unit Test or UI Test previously (only during school), took some time to understand the basics & refactored some code to be able to create some Unit Tests.
+The same happened with Functional Programming, WebHooks & UI Testing, that didn't know and got some time to understand the basics of what it is, but didn’t implement in time to deliver.
+As a Summary from the functionalities of the implemented: Basics + Pagination + UI Orientation + Dependency Injection + Basic Unit Testing.
+As TODO: Functional Programming + UI Testing + Favorites with WebHook, that will be implemented later on the develop branch.
+The branch to check for the challenge is the main branch.
