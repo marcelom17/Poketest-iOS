@@ -188,7 +188,7 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Special Defense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3p-Wf-fWH" userLabel="Special Defense">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Special Defense" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3p-Wf-fWH" userLabel="Special Defense">
                                                                                 <rect key="frame" x="3.0000000000000071" y="83.666666666666629" width="127.66666666666669" height="20.333333333333329"/>
                                                                                 <accessibility key="accessibilityConfiguration" identifier="type2"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -205,39 +205,39 @@
                                                                         </subviews>
                                                                         <edgeInsets key="layoutMargins" top="3" left="3" bottom="3" right="0.0"/>
                                                                     </stackView>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="a7s-uU-qrE" userLabel="StatsLabelValues">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="a7s-uU-qrE" userLabel="StatsLabelValues">
                                                                         <rect key="frame" x="130.66666666666666" y="0.0" width="32.666666666666657" height="133.66666666666666"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwx-eq-39m">
-                                                                                <rect key="frame" x="0.66666666666668561" y="3" width="28.333333333333332" height="21.666666666666668"/>
+                                                                                <rect key="frame" x="0.66666666666668561" y="3" width="28.333333333333332" height="20.333333333333332"/>
                                                                                 <accessibility key="accessibilityConfiguration" identifier="type1"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xG-hv-3vK">
-                                                                                <rect key="frame" x="0.66666666666668561" y="29.666666666666629" width="28.333333333333332" height="21.333333333333329"/>
+                                                                                <rect key="frame" x="0.66666666666668561" y="30" width="28.333333333333332" height="20.333333333333329"/>
                                                                                 <accessibility key="accessibilityConfiguration" identifier="type2"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34k-fx-FOG" userLabel="Special Attack">
-                                                                                <rect key="frame" x="0.66666666666668561" y="55.999999999999993" width="28.333333333333332" height="21.666666666666664"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34k-fx-FOG" userLabel="Special Attack">
+                                                                                <rect key="frame" x="0.66666666666668561" y="56.666666666666636" width="28.333333333333332" height="20.333333333333336"/>
                                                                                 <accessibility key="accessibilityConfiguration" identifier="type1"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tel-x7-ebg" userLabel="Special Defense">
-                                                                                <rect key="frame" x="0.66666666666668561" y="82.666666666666629" width="28.333333333333332" height="21.333333333333329"/>
+                                                                                <rect key="frame" x="0.66666666666668561" y="83.666666666666629" width="28.333333333333332" height="20.333333333333329"/>
                                                                                 <accessibility key="accessibilityConfiguration" identifier="type2"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3E-Lm-qDl">
-                                                                                <rect key="frame" x="0.66666666666668561" y="109" width="28.333333333333332" height="21.666666666666657"/>
+                                                                                <rect key="frame" x="0.66666666666668561" y="110.33333333333337" width="28.333333333333332" height="20.333333333333343"/>
                                                                                 <accessibility key="accessibilityConfiguration" identifier="type1"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
@@ -413,7 +413,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Pokeball" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="Pokeball" width="152" height="152"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <namedColor name="BaseRedColor">

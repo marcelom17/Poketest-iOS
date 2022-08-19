@@ -1,21 +1,30 @@
 //
-//  PoketestTests.swift
+//  PokemonListViewModelTests.swift
 //  PoketestTests
 //
-//  Created by Marcelo Macedo on 12/08/2022.
+//  Created by Marcelo Macedo on 19/08/2022.
 //
 
 import XCTest
 @testable import Poketest
 
-class PoketestTests: XCTestCase {
-
+class PokemonListViewModelTests: XCTestCase {
+    
+    private var pokemonManager : TypePokemonManager!
+    var viewModel : TypePokemonListViewModel!
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        self.pokemonManager = MockPokemonManager()
+        self.viewModel = MockPokemonListViewModel()
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        pokemonManager = nil
+        viewModel = nil
+        try super.tearDownWithError()
     }
 
     func testExample() throws {
@@ -24,6 +33,7 @@ class PoketestTests: XCTestCase {
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+
     }
 
     func testPerformanceExample() throws {

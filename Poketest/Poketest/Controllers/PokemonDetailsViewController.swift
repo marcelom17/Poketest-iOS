@@ -36,14 +36,9 @@ class PokemonDetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard let navBar = navigationController else {
-            fatalError("Navigation controller does not exist.")
-        }
-       // navBar.setStatusBar(backgroundColor: UIColor(named: Const.Colors.navigationRed)!) //use the type color
         if let pokeName = pokemon?.name?.capitalizingFirstLetter(){
             self.title = pokeName
         }
-        
     }
     
     func loadData(){

@@ -7,11 +7,16 @@
 
 import Foundation
 
-final class PokemonManager {
+protocol TypePokemonManager{
+    func performListRequest(with urlString: String, queue: DispatchQueue, completionBlock: @escaping (Result<PokemonList, Error>) -> Void)
+    func performDetailsRequest(with urlString: String, queue: DispatchQueue, completionBlock: @escaping (Result<Pokemon, Error>) -> Void)
+}
+
+final class PokemonManager : TypePokemonManager {
     
     //TODO - Add loading when fetching data
     
-    func performListRequest(with urlString: String, completionBlock: @escaping (Result<PokemonList, Error>) -> Void){
+    func performListRequest(with urlString: String, queue: DispatchQueue, completionBlock: @escaping (Result<PokemonList, Error>) -> Void){
         
         if let url = URL(string: urlString){ //1
             let session = URLSession(configuration: .default) //2
@@ -33,7 +38,7 @@ final class PokemonManager {
         }
     }
     
-    func performDetailsRequest(with urlString: String, completionBlock: @escaping (Result<Pokemon, Error>) -> Void){
+    func performDetailsRequest(with urlString: String, queue: DispatchQueue, completionBlock: @escaping (Result<Pokemon, Error>) -> Void){
         
         if let url = URL(string: urlString){ //1
             let session = URLSession(configuration: .default) //2

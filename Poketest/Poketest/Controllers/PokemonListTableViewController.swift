@@ -19,7 +19,7 @@ class PokemonListTableViewController: UITableViewController {
         super.viewDidLoad()
         viewModel = PokemonListViewModel.init(pokemonManager: pokemonManager, delegate: self)
         tableView.prefetchDataSource = self
-        viewModel.fetchListPokemons()
+        viewModel.fetchListPokemons(startValue: viewModel.getStartPaginationValue(), paginationSize: viewModel.getPaginationSize())
         searchBar.delegate = self
         
         tableView.register(UINib(nibName: Const.cellNibName, bundle: nil), forCellReuseIdentifier: Const.cellIdentifier)
@@ -30,12 +30,16 @@ class PokemonListTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard let navBar = navigationController else {
-            fatalError("Navigation controller does not exist.")
-        }
-        //navBar.setStatusBar(backgroundColor: UIColor(named: Const.Colors.navigationRed)!) //don't use with landscape on
+
         navigationItem.titleView = UIImageView(image: UIImage(named: Const.Images.titleIcon))
         navigationController?.setStatusBarStyle(.default)
+        //used for status bar with same color as navigation bar
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(named: Const.Colors.navigationRed)
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+              
+        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.navigationController?.navigationBar.standardAppearance = appearance        
     }
     
     // MARK: - Table view data source
@@ -83,21 +87,18 @@ extension PokemonListTableViewController: UITableViewDataSourcePrefetching{
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         let indexPath = viewModel.getIndexPathToFetch()
         if indexPaths[0].row >= indexPath.row{
-            viewModel.fetchListPokemons()
+            viewModel.fetchListPokemons(startValue: viewModel.getStartPaginationValue(), paginationSize: viewModel.getPaginationSize())
         }
     }
-    
 }
 
 
 //MARK: - Pokemon Manager Delegate
 extension PokemonListTableViewController : PokemonListViewModelDelegate{
-    
-    func didUpdatePokemons() { //only should be called when
+    func didUpdatePokemons() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
     }
     
     func didFailWithError(error: Error) {
@@ -112,20 +113,3 @@ extension PokemonListTableViewController : UISearchBarDelegate{
     //search list or fetch from api?
 }
 
-
-//MARK: - Change Status Bar Color
-extension UINavigationController {
-    
-    func setStatusBar(backgroundColor: UIColor) { //don't use when app can be in landscape, the subView will be on top on tha navigationController
-        let statusBarFrame: CGRect
-        if #available(iOS 13.0, *) {
-            statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
-        } else {
-            statusBarFrame = UIApplication.shared.statusBarFrame
-        }
-        let statusBarView = UIView(frame: statusBarFrame)
-        statusBarView.backgroundColor = backgroundColor
-        view.addSubview(statusBarView)
-    }
-    
-}
