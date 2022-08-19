@@ -33,12 +33,37 @@ class PokemonManagerTests: XCTestCase {
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-        let url = Const.baseURL
+        let startVal = 0
+        let sizeList = 20
+        let url = "\(Const.baseURL)/pokemon?offset=\(startVal)&limit=\(sizeList)"
         
         
-        pokemonManager.performListRequest(with: <#T##String#>, queue: queue, completionBlock: <#T##(Result<PokemonList, Error>) -> Void#>)
-        
+        pokemonManager.performListRequest(with: url, queue: queue) { result in
+            switch result{
+            case .failure(let error):
+                XCTFail("Error getting list: \(error)")
+                
+            case .success(let list):
+                XCTAssertEqual(list.results.count, sizeList)
+            }
+        }
     }
+    
+    func testListFetchError() throws {
 
+        let startVal = 0
+        let sizeList = 0
+        let url = "\(Const.baseURL)/pokemon?offset=\(startVal)&limit=\(sizeList)"
+        
+        pokemonManager.performListRequest(with: url, queue: queue) { result in
+            switch result{
+            case .failure(let error):
+                XCTFail("Error getting list: \(error)")
+                
+            case .success(let list):
+                XCTAssertEqual(list.results.count, sizeList)
+            }
+        }
+    }
 
 }

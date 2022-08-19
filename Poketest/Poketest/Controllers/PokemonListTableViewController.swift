@@ -24,13 +24,9 @@ class PokemonListTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName: Const.cellNibName, bundle: nil), forCellReuseIdentifier: Const.cellIdentifier)
         
-        //maybe use this for favorites?
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
         navigationItem.titleView = UIImageView(image: UIImage(named: Const.Images.titleIcon))
         navigationController?.setStatusBarStyle(.default)
         //used for status bar with same color as navigation bar
@@ -39,7 +35,7 @@ class PokemonListTableViewController: UITableViewController {
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
               
         self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        self.navigationController?.navigationBar.standardAppearance = appearance        
+        self.navigationController?.navigationBar.standardAppearance = appearance
     }
     
     // MARK: - Table view data source
@@ -58,7 +54,7 @@ class PokemonListTableViewController: UITableViewController {
         
         let pokemon = viewModel.getPokemonList()[indexPath.row]
         cell.pokemonNameLabel.text = pokemon.name?.capitalizingFirstLetter() //need to Capitalize first letter
-        cell.pokemonIDLabel.text = String(format: "%04d", pokemon.id)
+        cell.pokemonIDLabel.text = String(format: "%04d", pokemon.id) //count is bigger than 1000
         if let url = pokemon.sprites?.frontDefault{
             cell.pokemonImage.sd_setImage(with: URL(string: url))
         }
@@ -66,6 +62,8 @@ class PokemonListTableViewController: UITableViewController {
         return cell
     }
     
+    
+    //MARK: - Table view delegate methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: Const.detailsSegue, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -85,8 +83,7 @@ class PokemonListTableViewController: UITableViewController {
 //MARK: - TableVie DataSource Prefetching
 extension PokemonListTableViewController: UITableViewDataSourcePrefetching{
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        let indexPath = viewModel.getIndexPathToFetch()
-        if indexPaths[0].row >= indexPath.row{
+        if indexPaths[0].row >= viewModel.getIndexPathToFetch().row{
             viewModel.fetchListPokemons(startValue: viewModel.getStartPaginationValue(), paginationSize: viewModel.getPaginationSize())
         }
     }

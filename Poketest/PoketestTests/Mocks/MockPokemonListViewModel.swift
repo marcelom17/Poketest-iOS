@@ -9,7 +9,7 @@ import Foundation
 @testable import Poketest
 
 class MockPokemonListViewModel: TypePokemonListViewModel {
-    
+
     private var pokemonsList: [Pokemon] = []
     private let paginationSize = 20
     private var startPaginationValue = 0
@@ -23,5 +23,8 @@ class MockPokemonListViewModel: TypePokemonListViewModel {
         
     }
     
+    func createURLFetchList(start startValue: Int, size paginationSize: Int) -> String {
+        return "\(Const.baseURL)/pokemon?offset=\(startValue)&limit=\(paginationSize)"
+    }
     
 }

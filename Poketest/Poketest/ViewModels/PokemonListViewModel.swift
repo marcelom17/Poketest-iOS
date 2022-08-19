@@ -15,6 +15,7 @@ protocol PokemonListViewModelDelegate{
 protocol TypePokemonListViewModel {
     func fetchListPokemons(startValue: Int, paginationSize: Int)
     func fetchPokemon(urlString: String)
+    func createURLFetchList(start startValue: Int, size paginationSize: Int) -> String
 }
 
 class PokemonListViewModel : TypePokemonListViewModel{
@@ -32,22 +33,15 @@ class PokemonListViewModel : TypePokemonListViewModel{
     }
     
     func fetchListPokemons(startValue: Int, paginationSize: Int){ //startValue & pagination as values for testing
-        guard !isFetchInProgress else{
-            print("already fetching list")
+        guard validateIfCanFetchList(startValue: startValue) else{
+            print("Cannot fetch List")
             return
         }
-        guard startPaginationValue > -1  else{
-            print("No more items to fetch")
-            return
-        }
-
-        let urlString = "\(Const.baseURL)/pokemon?offset=\(startValue)&limit=\(paginationSize)"
-        print(urlString)
 
         isFetchInProgress = true
 
         let queue = DispatchQueue.main
-        pokemonManager.performListRequest(with: urlString, queue: queue){ result in
+        pokemonManager.performListRequest(with: createURLFetchList(start: startValue, size: paginationSize), queue: queue){ result in
             switch result{
             case .failure(let error):
                 queue.async {
@@ -63,6 +57,24 @@ class PokemonListViewModel : TypePokemonListViewModel{
                 }
             }
         }
+    }
+    
+    func validateIfCanFetchList(startValue: Int) -> Bool{
+        guard !isFetchInProgress else{
+            print("already fetching list")
+            return false
+        }
+        guard startValue > -1  else{
+            print("No more items to fetch")
+            return false
+        }
+        return true
+    }
+    
+    func createURLFetchList(start startValue: Int, size paginationSize: Int) -> String{
+        let urlString = "\(Const.baseURL)/pokemon?offset=\(startValue)&limit=\(paginationSize)"
+        print(urlString)
+        return urlString
     }
     
     private func validatePokemonsToFetch(pokemonList: PokemonList){

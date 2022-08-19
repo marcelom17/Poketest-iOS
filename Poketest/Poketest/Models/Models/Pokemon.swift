@@ -13,7 +13,11 @@ import Foundation
 //   let pokemon = try Pokemon(json)
 
 
-struct Pokemon : Codable{
+struct Pokemon : Codable, Equatable{
+    static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     let abilities: [Ability?]
     let baseExperience: Int?
     let forms: [Species?]
