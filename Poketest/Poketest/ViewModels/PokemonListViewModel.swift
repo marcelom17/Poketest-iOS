@@ -127,7 +127,7 @@ class PokemonListViewModel : TypePokemonListViewModel{
     }
     
     func getIndexPathToFetch() -> IndexPath {
-        return IndexPath(row: pokemonsList.count-5, section: 0)
+        return IndexPath(row: pokemonsList.count-5, section: 0) //need to rethink, not fetchin when only 5 left to end
     }
     
     func getPaginationSize() -> Int{
